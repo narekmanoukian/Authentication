@@ -28,17 +28,17 @@ class UserController {
         const token = generateJWT(user.id, user.email)
             return res.json({token})
     }
-    async login(req,res){
+    async login(req,res,next){
         const {email, password} = req.body
         
         const user = await User.findOne({where: {email}})
         if (!user) {
-            console.log("User is not found")
+            return next(console.log("User is not found"))
         }
         
         let comparePassword = bcrypt.compareSync(password, user.password)
         if (!comparePassword){
-            console.log("Wrong password")
+            return next(console.log("Wrong password"))
         }
         const token = generateJWT(user.id, user.email)
         return res.json({token})
