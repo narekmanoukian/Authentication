@@ -28,11 +28,14 @@ const Auth = observer(() => {
             
         } catch (e) {
             alert(e.response.data.message)
-        }
+        }}
 
-    }
+        const google = () => {
+            window.open("http://localhost:5000/auth/google", "_self");
+          };
     return(
             <div>
+                 <div>
                 <h2>{IsLogin ? "SignIn" : "SignUp"}</h2>
                 
                 <Form>
@@ -46,11 +49,7 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                         type="password"  />
                  
-                    
-
-                        
-                   
-                {IsLogin ?
+                    {IsLogin ?
                 <div>
                     Not have account? <NavLink to = {REGISTRATION_ROUTE}>SignUp</NavLink>
                 </div>
@@ -70,5 +69,11 @@ const Auth = observer(() => {
                 }
                 </Form>
             </div>
+                <div onClick={google}>
+                
+                Google
+                </div>
+            </div>
+           
        )})
 export default Auth;
